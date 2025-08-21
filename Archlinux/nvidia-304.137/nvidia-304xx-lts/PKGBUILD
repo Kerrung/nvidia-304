@@ -4,19 +4,19 @@
 # Maintainer: Philip Müller <philm@manjaro.org>
 # Maintainer: Roland Singer <roland@manjaro.org>
 
-_linuxprefix=linux-lts
+#_linuxprefix=linux-lts
 _extramodules="$(uname -r)"
-pkgname=$_linuxprefix-nvidia-304xx
-_pkgname=nvidia
+pkgname=nvidia-304xx-dkms
+#_pkgname=nvidia
 _pkgver=304.137
-pkgver=304.137_6.12.31_1-1
-pkgrel=1
-pkgdesc="NVIDIA drivers for linux."
+pkgver=304.137
+pkgrel=22
+pkgdesc="NVIDIA drivers for linux-lts 6.12.xxx, DKMS version."
 arch=('i686' 'x86_64')
 url="http://www.nvidia.com/"
-makedepends=("$_linuxprefix" "$_linuxprefix-headers" "nvidia-304xx-utils")
-provides=("$_pkgname=$pkgver" 'linux-nvidia-304xx')
-#conflicts=("nvidia-${_nver}xx-dkms")
+depends=('dkms')
+provides=('nvidia' 'nvidia-304xx' 'nvidia-304xx-dkms')
+conflicts=('nvidia-lts-304xx' 'nvidia' 'nvidia-lts' 'nvidia-dkms' 'nvidia-open' 'nvidia-open-lts' 'nvidia-open-dkms')
 license=('custom')
 install=nvidia.install
 options=(!strip)
@@ -32,40 +32,40 @@ source=('0001-disable-mtrr-4.3.patch' '0002-pud-offset-4.12.patch' '0003-nvidia-
 '0025-kernel-6.5.patch' '0026-gcc14-fix.patch' '0027-failfast.patch' '0028-gcc15-fix.patch')
 source_x86_64=("http://us.download.nvidia.com/XFree86/Linux-x86_64/${_pkgver}/NVIDIA-Linux-x86_64-${_pkgver}-no-compat32.run")
 md5sums=('e703f2eed605bd12c3665d0d64cf6198'
-'21a161409c9cdba66723f67e3d481b62'
-'cd96685ea2021d00e4bef5bff6ee836f'
-'7bd80b2123f87b24c5cf6ad1076c0eac'
-'0a9624e40abc976b5d775450fb5f3f89'
-'2b1e2bba05e47609f27a7fb6350f8758'
-'843484b2338446f89e7797ca2737fb4c'
-'2b456e376c0635bcde262d801449a712'
-'61427238488b5ea2c637ff1955183872'
-'52c5878635dce177be611dd51796acd6'
-'20959653a4868e0cc91e079f4d3cfbbb'
-'13ccc788dcc219abea39385c6fd0be3b'
-'4ddb9debdba3a643e28c91622c9dfe30'
-'a59a54e37be597282b3092cff130982a'
-'95dd72b7785b7d1d8e6a6a3a4960babf'
-'8ac0bfb5b3bc37bcd87b4096309076a0'
-'d622fb50b7943ccc7ef988349b005115'
-'6f6142a570f22de45bf2d86bc6fafeec'
-'b4580623479c0692f05dfbe4c3219ee2'
-'3b2aaeb3e7a293559da052f886e22086'
-'438327efc2d8c57b3ff7b3868efbe3d4'
-'5b00988b72405c85e08cd22f71433d6d'
-'6064fe8e79a221db4150a96cbea662ea'
-'8b9a113503194cb049d8392fa62807aa'
-'b76f09ca591bad194e86de5a43479bcd'
-'9f5c4f68ed3b5c4f491b13782f8300d3'
-'2a82551b33568cc676ca91d898445a43'
-'87ba291565a82788ac0c0dfd16ec1590'
-'b69b946e002eb21b04b3fd33862c6de6')
+         '21a161409c9cdba66723f67e3d481b62'
+         'cd96685ea2021d00e4bef5bff6ee836f'
+         '7bd80b2123f87b24c5cf6ad1076c0eac'
+         '0a9624e40abc976b5d775450fb5f3f89'
+         '2b1e2bba05e47609f27a7fb6350f8758'
+         '843484b2338446f89e7797ca2737fb4c'
+         '2b456e376c0635bcde262d801449a712'
+         '61427238488b5ea2c637ff1955183872'
+         '52c5878635dce177be611dd51796acd6'
+         '20959653a4868e0cc91e079f4d3cfbbb'
+         '13ccc788dcc219abea39385c6fd0be3b'
+         '4ddb9debdba3a643e28c91622c9dfe30'
+         'a59a54e37be597282b3092cff130982a'
+         '95dd72b7785b7d1d8e6a6a3a4960babf'
+         '8ac0bfb5b3bc37bcd87b4096309076a0'
+         'd622fb50b7943ccc7ef988349b005115'
+         '6f6142a570f22de45bf2d86bc6fafeec'
+         'b4580623479c0692f05dfbe4c3219ee2'
+         '3b2aaeb3e7a293559da052f886e22086'
+         '438327efc2d8c57b3ff7b3868efbe3d4'
+         '5b00988b72405c85e08cd22f71433d6d'
+         '6064fe8e79a221db4150a96cbea662ea'
+         '8b9a113503194cb049d8392fa62807aa'
+         'b76f09ca591bad194e86de5a43479bcd'
+         '9f5c4f68ed3b5c4f491b13782f8300d3'
+         '2a82551b33568cc676ca91d898445a43'
+         '87ba291565a82788ac0c0dfd16ec1590'
+         'b69b946e002eb21b04b3fd33862c6de6')
 md5sums_x86_64=('485506ee6a7c54780488dacddf1d56b1')
 
-pkgver() {
-    _ver=$(pacman -Q $_linuxprefix | cut -d " " -f 2)
-    printf '%s' "${_pkgver}_${_ver/-/_}"
-}
+#pkgver() {
+#    _ver=$(pacman -Q $_linuxprefix | cut -d " " -f 2)
+#    printf '%s' "${_pkgver}_${_ver/-/_}"
+#}
 
 #[[ "$CARCH" = "i686" ]] && _pkg="NVIDIA-Linux-x86-${_pkgver}"
 [[ "$CARCH" = "x86_64" ]] && _pkg="NVIDIA-Linux-x86_64-${_pkgver}-no-compat32"
@@ -120,7 +120,7 @@ prepare() {
 #}
 
 package() {
-    depends=("dkms" "${_linuxprefix}" "nvidia-304xx-utils")
+    depends=("dkms")
 
     cd "${_pkg}"
     install -dm 755 "${pkgdir}"/usr/src
