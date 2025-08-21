@@ -8,14 +8,15 @@ pkgver=304.137
 pkgrel=5
 arch=('x86_64')
 url="http://www.nvidia.com/"
+depends=('nvidia-304xx-dkms')
 makedepends=("patchelf")
 license=('custom')
 options=('!strip')
 source=('nvidia-drm-outputclass.conf' 'nvidia-utils.sysusers')
 source_x86_64=("http://us.download.nvidia.com/XFree86/Linux-x86_64/${pkgver}/NVIDIA-Linux-x86_64-${pkgver}-no-compat32.run")
-md5sums=('768a64259f7e8d8a46a13b876d6c443c'
-         '3d2894e71d81570bd00bce416d3e547d')
-md5sums_x86_64=('485506ee6a7c54780488dacddf1d56b1')
+sha512sums=('c49d246a519731bfab9d22afa5c2dd2d366db06d80182738b84881e93cd697c783f16ee04819275c05597bb063451a5d6102fbc562cd078d2a374533a23cea48'
+            '4b3ad73f5076ba90fe0b3a2e712ac9cde76f469cd8070280f960c3ce7dc502d1927f525ae18d008075c8f08ea432f7be0a6c3a7a6b49c361126dcf42f97ec499')
+sha512sums_x86_64=('4ab648647e4f3e2c352b2eab6454c264fe4728d8eb1264fafee2a4ab1a4ce59516abcf8490044d31e35309ea951e564cc217e13f7139a48bbf650a4238c5b87c')
 
 [[ "$CARCH" = "x86_64" ]] && _pkg="NVIDIA-Linux-x86_64-${pkgver}-no-compat32"
 
@@ -137,4 +138,3 @@ package_nvidia-304xx-utils() {
 
     create_links
 }
-
